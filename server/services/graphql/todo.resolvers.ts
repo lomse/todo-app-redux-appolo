@@ -4,9 +4,8 @@ import { ITodoQuery, ITodosQuery } from "./todo.interfaces"
 export default () => {
   const resolvers = {
     Query: {
-      todo: async (_: any, args: ITodoQuery) => {
-        return await Todo.findOne(args)
-      },
+      todo: async (_: any, args: ITodoQuery) => await Todo.findOne(args),
+      
       todos: async (_: any, args: ITodosQuery) => {
         const todos = await Todo.find(args)
         return { total: todos.length, list: todos }
