@@ -25,3 +25,7 @@ export interface ITodoQuery {
 export interface ITodosQuery {
   status?: string
 }
+
+export interface IAddTodoMutation {
+  input: ITodoModel
+}
