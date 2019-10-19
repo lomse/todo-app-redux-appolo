@@ -18,8 +18,6 @@ const vars = {
 
 const { error, value } = joi.validate(vars, schema);
 
-console.log({value, error})
-
 if (error) {
     throw new Error(`Config validation error: ${error.message}`);
 }
