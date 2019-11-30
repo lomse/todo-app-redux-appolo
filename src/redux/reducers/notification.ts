@@ -1,19 +1,19 @@
-interface INotificationReducerAction {
-  type: string
-  payload: object
-}
-
 enum NotificationTypeEnum {
   Success = 'Success',
   Error = 'Error'
 }
 
-export interface INotificationState {
+export interface INotification {
   notificationContent: string | null
   notificationType: NotificationTypeEnum | null
 }
 
-const initialState: INotificationState = {
+interface INotificationReducerAction {
+  type: string
+  payload: string
+}
+
+const initialState: INotification = {
   notificationContent: null,
   notificationType: null
 }

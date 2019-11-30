@@ -1,7 +1,4 @@
-export const addTodo = () => {
-  console.log('hello world')
-  return { type: '', payload: {} }
-}
+export const addTodo = () => {}
 
 export const deleteTodo = () => {}
 

@@ -1,22 +1,8 @@
-interface ITodosReducerAction {
-  type: string
-  payload: object
-}
+import { ITodo, ITodosReducerActionTypes } from "../../types/todo"
 
-export interface ITodoState {
-  id: number
-  title: string
-  dueDate: Date
-  repeat: string
-  endRepeat: {
-    repeatForever: boolean
-    endRepeatDate: Date
-  }
-}
+const initialState: ITodo[] = []
 
-const initialState: ITodoState[] = []
-
-const todosReducer = (state = initialState, { type, payload }: ITodosReducerAction) => {
+const todosReducer = (state = initialState, { type, payload }: ITodosReducerActionTypes) => {
   return state
 }
 
