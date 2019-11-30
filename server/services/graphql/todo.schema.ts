@@ -8,7 +8,9 @@ export default
   input TodoInput {
     title: String!
     dueDate: String
+    dueTime: Int
     repeatInterval: String
+    status: String
   }
 
   type Mutation {
@@ -29,6 +31,7 @@ export default
     _id: ID!
     title: String!
     dueDate: String
+    dueTime: Int
     repeatInterval: String
     status: String!
   }

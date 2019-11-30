@@ -7,6 +7,12 @@ const todoSchema = new Schema({
   },
   dueDate: {
       type: Date,
+      min: Date.now()
+  },
+  dueTime: {
+      type: Number,
+      min: 0,
+      max: 23
   },
   repeatInterval: {
       type: String,

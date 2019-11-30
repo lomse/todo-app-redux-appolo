@@ -1,6 +1,7 @@
 import './config/env'
 import cors from "cors";
 import express from "express";
+import bodyParser from "body-parser"
 import { ApolloServer } from "apollo-server-express";
 import dbConnection from "./db/connection";
 import typeDefs from "./services/graphql/todo.schema"
@@ -16,6 +17,7 @@ dbConnection(app);
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.json({ type: 'application/graphql' }));
 
 server.applyMiddleware({ app });
 

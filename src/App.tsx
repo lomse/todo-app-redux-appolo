@@ -1,13 +1,13 @@
 import React from 'react'
-import { Store, AnyAction } from 'redux'
-import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import ListTodosContainer from './components/ListTodosContainer'
 import AddTodoContainer from './components/AddTodoContainer'
 import styled from 'styled-components'
+import { IDataStore } from './types/common'
+import { connect } from 'react-redux'
 
 interface IAppProps {
-  store: Store<any, AnyAction>
+
 }
 
 const StyledWrapper = styled.div`
@@ -22,16 +22,22 @@ const StyledWrapper = styled.div`
   border-radius: 20px;
 `
 
-const App: React.FC<IAppProps> = ({ store }) => (
-  <Provider store={store}>
-    <StyledWrapper>
-      <Router>
-        <Route exact={true} path="/" component={ListTodosContainer} />
-        <Route exact path="/filter/:filter" component={ListTodosContainer} />
-        <Route exact={true} path="/new-todo" component={AddTodoContainer} />
-      </Router>
-    </StyledWrapper>
-  </Provider>
+const App: React.FC = () => (
+  <StyledWrapper>
+    <Router>
+      <Route exact={true} path="/" component={ListTodosContainer} />
+      <Route exact path="/filter/:filter" component={ListTodosContainer} />
+      <Route exact={true} path="/new-todo" component={AddTodoContainer} />
+    </Router>
+  </StyledWrapper>
 )
 
-export default App
+const mapStateToProps = (state: IDataStore, ownProps: IAppProps) => {
+  return state
+}
+
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

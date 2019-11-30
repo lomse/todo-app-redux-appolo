@@ -13,7 +13,12 @@ export default () => {
     },
 
     Mutation: {
-      addTodo: async (_: any, { input }: IAddTodoMutation) => await Todo.create(input)
+      addTodo: async (_: any, { input }: IAddTodoMutation) => {
+        if(!input.status) {
+          input = Object.assign({}, input, {status: 'Active'})
+        }
+        return await Todo.create(input)
+      }
     }
   }
   return resolvers
