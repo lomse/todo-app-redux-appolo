@@ -4,9 +4,9 @@ import store from './redux/store'
 import * as serviceWorker from './serviceWorker'
 import '@fortawesome/fontawesome-free/css/all.css'
 import './index.css'
-import Root from './Root'
+import App from './App'
 
-ReactDOM.render(<Root store={store} />, document.getElementById('root'))
+ReactDOM.render(<App store={store} />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
