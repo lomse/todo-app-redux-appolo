@@ -6,7 +6,7 @@ import ListTodosContainer from './components/ListTodosContainer'
 import AddTodoContainer from './components/AddTodoContainer'
 import styled from 'styled-components'
 
-interface IRoot {
+interface IAppProps {
   store: Store<any, AnyAction>
 }
 
@@ -22,7 +22,7 @@ const StyledWrapper = styled.div`
   border-radius: 20px;
 `
 
-const Root: React.FC<IRoot> = ({ store }) => (
+const App: React.FC<IAppProps> = ({ store }) => (
   <Provider store={store}>
     <StyledWrapper>
       <Router>
@@ -34,4 +34,4 @@ const Root: React.FC<IRoot> = ({ store }) => (
   </Provider>
 )
 
-export default Root
+export default App

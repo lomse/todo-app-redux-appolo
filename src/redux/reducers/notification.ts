@@ -1,17 +1,4 @@
-enum NotificationTypeEnum {
-  Success = 'Success',
-  Error = 'Error'
-}
-
-export interface INotification {
-  notificationContent: string | null
-  notificationType: NotificationTypeEnum | null
-}
-
-interface INotificationReducerAction {
-  type: string
-  payload: string
-}
+import { INotification, INotificationReducerAction } from "../../types/notification"
 
 const initialState: INotification = {
   notificationContent: null,
