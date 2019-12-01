@@ -1,7 +1,7 @@
-import { ITodo } from "./todo";
-import { INotification } from "./notification";
+import { INotification } from './notification'
+import { ITodoState } from '../redux/reducers/todosReducer'
 
 export interface IDataStore {
-  todos: ITodo[]
+  todos: ITodoState
   notification: INotification
 }

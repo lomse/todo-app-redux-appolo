@@ -8,11 +8,13 @@
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
     "apollo-boost": "^0.4.4",
+    "apollo-client": "^2.6.4",
     "apollo-server-express": "^2.9.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "mongoose": "^5.7.5",
     "nanoscroller": "^0.8.7",
     "react": "^16.9.0",
@@ -21,6 +23,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.2.0",
     "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2"
   },
   "scripts": {

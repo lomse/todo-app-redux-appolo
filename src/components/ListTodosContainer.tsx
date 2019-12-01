@@ -1,38 +1,41 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import App from './List/Index'
-import { addTodo, deleteTodo } from '../redux/actions/todos'
+import TodosListPresentation from './List/Index'
+import { fetchTodos } from '../redux/actions/todo'
+import { IDataStore } from '../types/common'
 
 interface IAppProps {
   onAddTodo: Function
+  onFetchTodo: Function
 }
 
 class AppContainer extends Component<IAppProps> {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.onFetchTodo()
+  }
 
   render() {
-    return <App />
+    return <TodosListPresentation />
   }
 
   onAddTodo = () => {
     this.props.onAddTodo()
   }
 
-  onDeleteTodo = () => {}
+  onDeleteTodo = () => { }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IDataStore, ownProps: IAppProps) => {
   return {
-    todos: state.todos
+    ...ownProps,
+    todos: state.todos.items,
+    loading: state.todos.loading,
+    error: state.todos.error
   }
 }
 
-const mapActionsToProps = {
-  onAddTodo: addTodo,
-  onDeleteTodo: deleteTodo
+const mapDispatchToProps = {
+  onFetchTodo: fetchTodos
 }
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(AppContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)

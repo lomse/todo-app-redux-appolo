@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import todoReducer from './todos'
-import notificationReducer from './notification'
+import todoReducer from './todosReducer'
+// import notificationReducer from './notificationReducer'
 
 export default combineReducers({
-  todos: todoReducer,
-  notification: notificationReducer
+  todos: todoReducer
+  // notification: notificationReducer
 })

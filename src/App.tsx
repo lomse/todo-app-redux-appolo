@@ -3,12 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import ListTodosContainer from './components/ListTodosContainer'
 import AddTodoContainer from './components/AddTodoContainer'
 import styled from 'styled-components'
-import { IDataStore } from './types/common'
-import { connect } from 'react-redux'
 
-interface IAppProps {
-
-}
+interface IAppProps {}
 
 const StyledWrapper = styled.div`
   width: 400px;
@@ -32,12 +28,4 @@ const App: React.FC = () => (
   </StyledWrapper>
 )
 
-const mapStateToProps = (state: IDataStore, ownProps: IAppProps) => {
-  return state
-}
-
-const mapDispatchToProps = {
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

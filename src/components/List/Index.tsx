@@ -19,7 +19,7 @@ const FilterLinksMenuItem = styled.li`
   padding: 0 5px;
 `
 
-const App: React.FC = () => {
+const TodosListWrapper: React.FC = () => {
   return (
     <React.Fragment>
       <PageTitle>ALL TODOS</PageTitle>
@@ -46,4 +46,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default TodosListWrapper

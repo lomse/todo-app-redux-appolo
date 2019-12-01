@@ -1,4 +1,4 @@
-import { INotification, INotificationReducerAction } from "../../types/notification"
+import { INotification, INotificationReducerAction } from '../../types/notification'
 
 const initialState: INotification = {
   notificationContent: null,
