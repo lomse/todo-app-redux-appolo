@@ -1,9 +1,22 @@
+export enum TODO_STATUS {
+  ACTIVE = 'Active',
+  COMPLETED = 'Completed'
+}
+
+export enum TODO_REPEAT_INTERVAL {
+  WEEKLY = 'Weekly',
+  MONTHLY = 'Monthly',
+  YEARLY = 'Yearly'
+}
+
 export interface ITodo {
-  id: number
+  _id: number
   title: string
-  dueDate?: Date
+  dueDate?: number
+  dueTime?: number
   repeat?: string
-  endRepeat?: {
+  status?: TODO_STATUS
+  repeatInterval?: {
     repeatForever: boolean
     endRepeatDate: Date
   }
@@ -25,44 +38,7 @@ export interface IFetchTodosFailureTypes {
 
 export type IFetchTodosTypes = IFetchTodosBeginTypes | IFetchTodosSuccessTypes | IFetchTodosFailureTypes
 
-// export interface IFetchTodosActionTypes {
-//   type: string
-//   payload: {
-//     todos: ITodo[]
-//   }
-// }
-
-// export interface IAddTodoActionTypes {
-//   type: string
-//   payload: {
-//     todo: ITodo
-//   }
-// }
-
-// export interface IDeleteTodoActionTypes {
-//   type: string
-//   payload: {
-//     todo: {
-//       id: number
-//     }
-//   }
-// }
-
-// export interface IUpdateTodoActionTypes {
-//   type: string
-//   payload: {
-//     id: number
-//     body: {
-//       title?: string
-//       dueDate?: string
-//       endRepeat?: {
-//         repeatForever: boolean
-//         endRepeatDate: Date
-//       }
-//     }
-//   }
-// }
-
-// export type ITodosReducerActionTypes =
-//   | IFetchTodosSuccessTypes
-//   | IFetchTodosFailureTypes
+export interface IDropdownOption {
+  label: string
+  value: string | number
+}

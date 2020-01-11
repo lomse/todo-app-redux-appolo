@@ -5,3 +5,9 @@ export interface IDataStore {
   todos: ITodoState
   notification: INotification
 }
+
+export enum BUTTON_TYPES {
+  SUBMIT = 'submit',
+  CANCEL = 'cancel',
+  RESET = 'reset'
+}

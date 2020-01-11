@@ -1,41 +1,20 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import TodosListPresentation from './List/Index'
 import { fetchTodos } from '../redux/actions/todo'
 import { IDataStore } from '../types/common'
 
-interface IAppProps {
-  onAddTodo: Function
-  onFetchTodo: Function
+export const { Provider, Consumer } = React.createContext(null)
+
+const AppContainer: React.FC = () => {
+  const dispatch = useDispatch()
+  const todos = useSelector((state: IDataStore) => state.todos)
+
+  useEffect(() => {
+    dispatch(fetchTodos())
+  }, [dispatch])
+
+  return <TodosListPresentation todos={todos.items} loading={todos.loading} error={todos.error} />
 }
 
-class AppContainer extends Component<IAppProps> {
-  componentDidMount() {
-    this.props.onFetchTodo()
-  }
-
-  render() {
-    return <TodosListPresentation />
-  }
-
-  onAddTodo = () => {
-    this.props.onAddTodo()
-  }
-
-  onDeleteTodo = () => { }
-}
-
-const mapStateToProps = (state: IDataStore, ownProps: IAppProps) => {
-  return {
-    ...ownProps,
-    todos: state.todos.items,
-    loading: state.todos.loading,
-    error: state.todos.error
-  }
-}
-
-const mapDispatchToProps = {
-  onFetchTodo: fetchTodos
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)
+export default AppContainer

@@ -1,26 +1,11 @@
-import ApolloClient, { gql } from 'apollo-boost'
+import ApolloClient from 'apollo-boost'
 import { FETCH_TODOS_BEGIN, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE } from '../action-types/todos'
 import { ITodo, IFetchTodosTypes } from '../../types/todo'
+import { GET_TODOS_QUERY } from '../../graphql/queries'
 
 const client = new ApolloClient({
   uri: 'http://localhost:5000/graphql'
 })
-
-const GET_TODOS_QUERY = gql`
-  query TodoApp {
-    todos {
-      total
-      list {
-        _id
-        title
-        dueDate
-        dueTime
-        repeatInterval
-        status
-      }
-    }
-  }
-`
 
 export const fetchTodos = () => {
   return async (dispatch: Function) => {
@@ -51,10 +36,10 @@ export const fetchTodosFailure = (error: any): IFetchTodosTypes => ({
   type: FETCH_TODOS_FAILURE
 })
 
-export const addTodo = () => { }
+export const addTodo = () => {}
 
-export const deleteTodo = () => { }
+export const deleteTodo = () => {}
 
-export const updateTodo = () => { }
+export const updateTodo = () => {}
 
-export const completeTodo = () => { }
+export const completeTodo = () => {}

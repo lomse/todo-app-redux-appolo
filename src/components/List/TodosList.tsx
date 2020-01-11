@@ -1,6 +1,7 @@
 import React from 'react'
 import OneTodo from './OneTodo'
 import styled from 'styled-components'
+import { ITodo, TODO_STATUS } from '../../types/todo'
 
 const StyledTodosList = styled.div`
   height: 500px;
@@ -9,10 +10,22 @@ const StyledTodosList = styled.div`
   margin: auto;
 `
 
-const TodosList: React.FC = () => (
+interface ITodosList {
+  todos: ITodo[]
+}
+
+const TodosList: React.FC<ITodosList> = ({ todos }) => (
   <StyledTodosList>
-    <OneTodo title="Learn React.js" dueDate="12/9/19, 4AM, Monthly" />
-    <OneTodo title="Go for jogging" dueDate="12/9/19, 4AM, Monthly" completed={true} />
+    {todos.map(todo => (
+      <OneTodo
+        key={todo._id}
+        title={todo.title}
+        dueDate="12/9/19, 4AM, Monthly"
+        completed={todo.status === TODO_STATUS.ACTIVE ? false : true}
+      />
+    ))}
+
+    {/* <OneTodo title="Go for jogging" dueDate="12/9/19, 4AM, Monthly" completed={true} />
     <OneTodo title="Do push-ups" />
     <OneTodo title="Drink water" dueDate="12/9/19, 4AM, Monthly" completed={true} />
     <OneTodo title="Call Mom" completed={true} />
@@ -22,7 +35,7 @@ const TodosList: React.FC = () => (
     <OneTodo title="Write a tutorial" />
     <OneTodo title="Go to the kitchen" dueDate="12/9/19, 4AM, Monthly" completed={true} />
     <OneTodo title="Check upon madam" dueDate="12/9/19, 4AM, Monthly" completed={true} />
-    <OneTodo title="Watch documentary" completed={true} />
+    <OneTodo title="Watch documentary" completed={true} /> */}
   </StyledTodosList>
 )
 

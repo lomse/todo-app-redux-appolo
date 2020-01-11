@@ -5,6 +5,7 @@ import TodosList from './TodosList'
 import { Link } from 'react-router-dom'
 import PageTitle from '../Elements/PageTitle'
 import styled from 'styled-components'
+import { ITodo } from '../../types/todo'
 
 const FilterLinksMenu = styled.ul`
   margin: 0 0 20px 0;
@@ -19,7 +20,17 @@ const FilterLinksMenuItem = styled.li`
   padding: 0 5px;
 `
 
-const TodosListWrapper: React.FC = () => {
+const PreloaderDiv = styled.div`
+  padding-top: 40%;
+  text-align: center;
+`
+interface ITodosListWrapper {
+  todos: ITodo[]
+  loading: boolean
+  error: string | null
+}
+
+const TodosListWrapper: React.FC<ITodosListWrapper> = ({ todos, loading, error }) => {
   return (
     <React.Fragment>
       <PageTitle>ALL TODOS</PageTitle>
@@ -36,12 +47,20 @@ const TodosListWrapper: React.FC = () => {
         </FilterLinksMenuItem>
       </FilterLinksMenu>
 
-      <TodosList />
-      <Link to="/new-todo">
-        <RoundedPlusButton classNames="btn btn-info rounded-circle position-absolute">
-          <PlusIcon styles={{ fontSize: 25 }} />
-        </RoundedPlusButton>
-      </Link>
+      {loading && (
+        <PreloaderDiv>
+          <img src="./spinner.gif" alt="Preloader" />
+        </PreloaderDiv>
+      )}
+      {error ? <p>Error Message: {error}</p> : <TodosList todos={todos} />}
+
+      {!loading && !error && (
+        <Link to="/new-todo">
+          <RoundedPlusButton classNames="btn btn-info rounded-circle position-absolute">
+            <PlusIcon styles={{ fontSize: 25 }} />
+          </RoundedPlusButton>
+        </Link>
+      )}
     </React.Fragment>
   )
 }
