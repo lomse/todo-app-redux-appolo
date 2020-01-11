@@ -15,3 +15,16 @@ export const GET_TODOS_QUERY = gql`
     }
   }
 `
+
+export const ADD_TODO_MUTATION = gql`
+  mutation addTodo($input:TodoInput!){
+  addTodo(input:$input) {
+    _id
+    title
+    dueDate
+    dueTime
+    repeatInterval
+    status
+  }
+}
+`

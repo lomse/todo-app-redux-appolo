@@ -15,28 +15,22 @@ interface ITodosList {
 }
 
 const TodosList: React.FC<ITodosList> = ({ todos }) => (
-  <StyledTodosList>
-    {todos.map(todo => (
-      <OneTodo
-        key={todo._id}
-        title={todo.title}
-        dueDate="12/9/19, 4AM, Monthly"
-        completed={todo.status === TODO_STATUS.ACTIVE ? false : true}
-      />
-    ))}
+  <React.Fragment>
+    {todos.length === 0 && <p style={{textAlign: 'center', fontSize: 17, fontWeight: 'bold', marginTop: 250}}>No Todo found. Create one.</p>}
+    {todos.length > 0 && (
+      <StyledTodosList>
+        {todos.map(todo => (
+          <OneTodo
+            key={todo._id}
+            title={todo.title}
+            dueDate="12/9/19, 4AM, Monthly"
+            completed={todo.status === TODO_STATUS.ACTIVE ? false : true}
+          />
+        ))}
+      </StyledTodosList>
+    )}
 
-    {/* <OneTodo title="Go for jogging" dueDate="12/9/19, 4AM, Monthly" completed={true} />
-    <OneTodo title="Do push-ups" />
-    <OneTodo title="Drink water" dueDate="12/9/19, 4AM, Monthly" completed={true} />
-    <OneTodo title="Call Mom" completed={true} />
-    <OneTodo title="Pay video games" dueDate="12/9/19, 4AM, Monthly" completed={true} />
-    <OneTodo title="Visit auntie Jane" />
-    <OneTodo title="Read books" completed={true} />
-    <OneTodo title="Write a tutorial" />
-    <OneTodo title="Go to the kitchen" dueDate="12/9/19, 4AM, Monthly" completed={true} />
-    <OneTodo title="Check upon madam" dueDate="12/9/19, 4AM, Monthly" completed={true} />
-    <OneTodo title="Watch documentary" completed={true} /> */}
-  </StyledTodosList>
+  </React.Fragment>
 )
 
 export default TodosList

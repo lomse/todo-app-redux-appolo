@@ -12,8 +12,8 @@ export enum TODO_REPEAT_INTERVAL {
 export interface ITodo {
   _id: number
   title: string
-  dueDate?: number
-  dueTime?: number
+  dueDate?: string
+  dueTime?: string
   repeat?: string
   status?: TODO_STATUS
   repeatInterval?: {
@@ -36,7 +36,21 @@ export interface IFetchTodosFailureTypes {
   error: string
 }
 
-export type IFetchTodosTypes = IFetchTodosBeginTypes | IFetchTodosSuccessTypes | IFetchTodosFailureTypes
+export type IFetchTodosTypes = IFetchTodosBeginTypes | IFetchTodosSuccessTypes | IFetchTodosFailureTypes | IAddTodoStartedTypes | IAddTodoSuccessTypes | IAddTodoFailureTypes
+
+export interface IAddTodoStartedTypes {
+  type: 'ADD_TODO_STARTED',
+}
+
+export interface IAddTodoSuccessTypes {
+  type: 'ADD_TODO_SUCCESS',
+  item: ITodo
+}
+
+export interface IAddTodoFailureTypes {
+  type: 'ADD_TODO_FAILURE',
+  error: string
+}
 
 export interface IDropdownOption {
   label: string

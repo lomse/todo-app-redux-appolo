@@ -8,7 +8,7 @@ export default
   input TodoInput {
     title: String!
     dueDate: String
-    dueTime: Int
+    dueTime: String
     repeatInterval: String
     status: String
   }
@@ -31,7 +31,7 @@ export default
     _id: ID!
     title: String!
     dueDate: String
-    dueTime: Int
+    dueTime: String
     repeatInterval: String
     status: String!
   }

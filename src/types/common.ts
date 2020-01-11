@@ -11,3 +11,16 @@ export enum BUTTON_TYPES {
   CANCEL = 'cancel',
   RESET = 'reset'
 }
+
+export enum INPUT_TYPES {
+  BUTTON = 'button',
+  CHECKBOX = 'checkbox',
+  EMAIL = 'email',
+  FILE = 'file',
+  HIDDEN = 'hidden',
+  NUMBER = 'number',
+  PASSWORD = 'password',
+  RADIO = 'radio',
+  SUBMIT = 'submit',
+  TEXT = 'text'
+}

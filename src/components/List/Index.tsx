@@ -34,29 +34,34 @@ const TodosListWrapper: React.FC<ITodosListWrapper> = ({ todos, loading, error }
   return (
     <React.Fragment>
       <PageTitle>ALL TODOS</PageTitle>
-      <FilterLinksMenu>
-        <FilterLinksMenuItem>Show:</FilterLinksMenuItem>
-        <FilterLinksMenuItem>
-          <Link to="/">All</Link>
-        </FilterLinksMenuItem>
-        <FilterLinksMenuItem>
-          <Link to="/filter/active">Active</Link>
-        </FilterLinksMenuItem>
-        <FilterLinksMenuItem>
-          <Link to="/filter/completed">Completed</Link>
-        </FilterLinksMenuItem>
-      </FilterLinksMenu>
+
+      {todos.length > 0 && (
+        <FilterLinksMenu>
+          <FilterLinksMenuItem>Show:</FilterLinksMenuItem>
+          <FilterLinksMenuItem>
+            <Link to="/">All</Link>
+          </FilterLinksMenuItem>
+          <FilterLinksMenuItem>
+            <Link to="/filter/active">Active</Link>
+          </FilterLinksMenuItem>
+          <FilterLinksMenuItem>
+            <Link to="/filter/completed">Completed</Link>
+          </FilterLinksMenuItem>
+        </FilterLinksMenu>
+      )}
 
       {loading && (
         <PreloaderDiv>
           <img src="./spinner.gif" alt="Preloader" />
         </PreloaderDiv>
       )}
-      {error ? <p>Error Message: {error}</p> : <TodosList todos={todos} />}
+      {error && <p>Error Message: {error}</p>}
+
+      {!loading && <TodosList todos={todos} />}
 
       {!loading && !error && (
         <Link to="/new-todo">
-          <RoundedPlusButton classNames="btn btn-info rounded-circle position-absolute">
+          <RoundedPlusButton classNames="btn rounded-circle position-absolute">
             <PlusIcon styles={{ fontSize: 25 }} />
           </RoundedPlusButton>
         </Link>

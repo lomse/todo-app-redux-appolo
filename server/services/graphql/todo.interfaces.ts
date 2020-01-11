@@ -14,6 +14,7 @@ enum ITodoStatus {
 export interface ITodoModel extends Document {
   title: string
   dueDate: Date
+  dueTime: Date
   repeatInterval: ITodoRepeatInterval
   status?: ITodoStatus
 }

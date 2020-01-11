@@ -12,6 +12,7 @@ const FloatingRoundButton = styled.button.attrs(({ className }) => ({ className 
   width: 70px;
   height: 70px;
   box-shadow: 2px 2px 3px #999;
+  background: #83bdfb
 `
 
 const RoundedPlusButton: React.FC<IRoundedPlusButton> = ({ classNames, children }) => (

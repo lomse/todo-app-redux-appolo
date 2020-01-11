@@ -1,7 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
+import { INPUT_TYPES } from '../../types/common'
 
-const StyledTextInput = styled.input`
+interface ITextInputElementProps {
+  value: string | number
+  type: INPUT_TYPES
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+interface IStyledTextInputProps {
+  value: string | number
+  type: INPUT_TYPES
+}
+
+const StyledTextInput = styled.input.attrs<IStyledTextInputProps>(props=>({type: props.type, value: props.value}))`
   border: 1px solid #c3bcbc;
   border-radius: 5px;
   width: 100%;
@@ -13,6 +25,6 @@ const StyledTextInput = styled.input`
   }
 `
 
-const TextInputElement = () => <StyledTextInput placeholder="Todo title" maxLength={45} />
+const TextInputElement: React.FC<ITextInputElementProps> = (props) => <StyledTextInput {...props} placeholder="Todo title" maxLength={45} />
 
 export default TextInputElement

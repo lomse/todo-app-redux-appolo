@@ -1,5 +1,5 @@
 import Todo from "./todo.model"
-import { ITodoQuery, ITodosQuery, ITodoModel, IAddTodoMutation } from "./todo.interfaces"
+import { ITodoQuery, ITodosQuery, IAddTodoMutation } from "./todo.interfaces"
 
 export default () => {
   const resolvers = {
@@ -17,6 +17,7 @@ export default () => {
         if(!input.status) {
           input = Object.assign({}, input, {status: 'Active'})
         }
+        console.log({input})
         return await Todo.create(input)
       }
     }
