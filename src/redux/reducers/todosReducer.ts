@@ -4,14 +4,16 @@ import { FETCH_TODOS_BEGIN, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE, ADD_TODO_S
 export interface ITodoState {
   items: ITodo[]
   loading: boolean,
-  adding: boolean,
+  addingStarted: boolean,
+  addingEnded: boolean,
   error: string | null
 }
 
 const initialState: ITodoState = {
   items: [],
   loading: true,
-  adding: false,
+  addingStarted: false,
+  addingEnded: false,
   error: null
 }
 
@@ -20,6 +22,8 @@ const todosReducer = (state = initialState, action: IFetchTodosTypes) => {
     case FETCH_TODOS_BEGIN:
       return {
         ...state,
+        addingStarted: false,
+        addingEnded: false,
         loading: true,
         error: null
       }
@@ -27,6 +31,8 @@ const todosReducer = (state = initialState, action: IFetchTodosTypes) => {
       return {
         ...state,
         items: action.items,
+        addingStarted: false,
+        addingEnded: false,
         loading: false,
         error: null
       }
@@ -42,21 +48,24 @@ const todosReducer = (state = initialState, action: IFetchTodosTypes) => {
       return {
         ...state,
         loading: false,
-        adding: true,
+        addingStarted: true,
+        addingEnded: false,
         error: null
       }
     case ADD_TODO_SUCCESS:
       return {
         ...state,
         loading: false,
-        adding: false,
+        addingStarted: false,
+        addingEnded: true,
         error: null
       }
     case ADD_TODO_FAILURE:
       return {
         ...state,
         loading: false,
-        adding: false,
+        addingStarted: false,
+        addingEnded: false,
         error: action.error
       }
     default:

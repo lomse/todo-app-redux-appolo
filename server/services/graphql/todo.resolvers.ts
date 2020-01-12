@@ -7,7 +7,7 @@ export default () => {
       todo: async (_: any, args: ITodoQuery) => await Todo.findOne(args),
 
       todos: async (_: any, args: ITodosQuery) => {
-        const todos = await Todo.find(args)
+        const todos = await Todo.find(args, {}, {sort: {'_id': -1}})
         return { total: todos.length, list: todos }
       }
     },
@@ -17,7 +17,6 @@ export default () => {
         if(!input.status) {
           input = Object.assign({}, input, {status: 'Active'})
         }
-        console.log({input})
         return await Todo.create(input)
       }
     }

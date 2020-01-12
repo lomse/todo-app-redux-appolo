@@ -4,9 +4,8 @@ import TodosListPresentation from './List/Index'
 import { fetchTodos } from '../redux/actions/todo'
 import { IDataStore } from '../types/common'
 
-export const { Provider, Consumer } = React.createContext(null)
-
 const AppContainer: React.FC = () => {
+
   const dispatch = useDispatch()
   const todos = useSelector((state: IDataStore) => state.todos)
 

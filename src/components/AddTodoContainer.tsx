@@ -28,7 +28,8 @@ const defaultOption: IDropdownOption = { label: 'Never', value: '' }
 
 const AddTodoContainer = () => {
   const dispatch = useDispatch()
-  const addingTodo = useSelector((state: IDataStore) => state.todos.adding)
+  const addingTodoStarted = useSelector((state: IDataStore) => state.todos.addingStarted)
+  const addingTodoEnded = useSelector((state: IDataStore) => state.todos.addingEnded)
   const [dueDate, setDueDate] = useState(new Date())
   const [dueTime, setDueTime] = useState(new Date())
   const [repeatInterval, setRepeatInterval] = useState<ValueType<IDropdownOption>>(defaultOption)
@@ -45,7 +46,14 @@ const AddTodoContainer = () => {
     setTodoTitle(evt.target.value)
   }
 
-  const handleSubmitForm = () => {
+
+  const handleSubmitForm = (evt: React.FormEvent)=> {
+      evt.preventDefault();
+      handleSubmitButton()
+  }
+
+
+  const handleSubmitButton = () => {
     let formBody = {}
 
     if (!todoTitle) {
@@ -69,58 +77,60 @@ const AddTodoContainer = () => {
     dispatch(addTodo(formBody))
   }
 
-  if (listTodos) {
-    return <Redirect to="/" />
-  }
+  console.log({ addingTodoEnded })
 
   return (
     <React.Fragment>
+      {listTodos && <Redirect to={{ pathname: "/" }} />}
+      {addingTodoEnded && <Redirect to={{ pathname: "/" }} />}
       <PageTitle>NEW TODO</PageTitle>
-      <FormGroup>
-        <Label>Title <sup>*</sup> </Label>
-        <TextInputElement type={INPUT_TYPES.TEXT} value={todoTitle} onChange={(evt: React.ChangeEvent<HTMLInputElement>) => handleChangeTodoTitleInput(evt)} />
-        <ErrorLabel>{!formValidation.todoTitle && 'The title is required'}</ErrorLabel>
-      </FormGroup>
-      <FormGroup>
-        <Label>Due Date</Label>
-        <DatePicker
-          selected={dueDate}
-          onChange={(date: any) => setDueDate(date)}
-          minDate={subDays(new Date(), 0)}
-          className="datepickerInput"
-        />
-        <ErrorLabel>{!formValidation.dueDate && 'Wrong date.'}</ErrorLabel>
-      </FormGroup>
-      <FormGroup>
-        <Label>Due Time</Label>
-        <DatePicker
-          selected={dueTime}
-          onChange={(date: any) => setDueTime(date)}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={60}
-          timeCaption="Due Time"
-          dateFormat="h:mm:aa"
-          className="datepickerInput"
-          placeholderText="Enter due time"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label>Repeat Interval</Label>
-        <Select options={options} className="reactSelect" value={repeatInterval} onChange={(option) => setRepeatInterval(option)} />
-      </FormGroup>
-      <FormGroup textAlign="center">
-        <Button disabled={addingTodo} buttonType={BUTTON_TYPES.SUBMIT} onClick={() => handleSubmitForm()}>
-          {!addingTodo ? 'Submit' : 'Please wait...'}
+      <form onSubmit={(evt)=>handleSubmitForm(evt)}>
+        <FormGroup>
+          <Label>Title <sup>*</sup> </Label>
+          <TextInputElement type={INPUT_TYPES.TEXT} value={todoTitle} onChange={(evt: React.ChangeEvent<HTMLInputElement>) => handleChangeTodoTitleInput(evt)} />
+          <ErrorLabel>{!formValidation.todoTitle && 'The title is required'}</ErrorLabel>
+        </FormGroup>
+        <FormGroup>
+          <Label>Due Date</Label>
+          <DatePicker
+            selected={dueDate}
+            onChange={(date: any) => setDueDate(date)}
+            minDate={subDays(new Date(), 0)}
+            className="datepickerInput"
+          />
+          <ErrorLabel>{!formValidation.dueDate && 'Wrong date.'}</ErrorLabel>
+        </FormGroup>
+        <FormGroup>
+          <Label>Due Time</Label>
+          <DatePicker
+            selected={dueTime}
+            onChange={(date: any) => setDueTime(date)}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={60}
+            timeCaption="Due Time"
+            dateFormat="h:mm:aa"
+            className="datepickerInput"
+            placeholderText="Enter due time"
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Repeat Interval</Label>
+          <Select options={options} className="reactSelect" value={repeatInterval} onChange={(option) => setRepeatInterval(option)} />
+        </FormGroup>
+        <FormGroup textAlign="center">
+          <Button disabled={addingTodoStarted} buttonType={BUTTON_TYPES.SUBMIT} onClick={() => handleSubmitButton()}>
+            {!addingTodoStarted ? 'Submit' : 'Please wait...'}
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+        {!addingTodoStarted && (
+            <Button buttonType={BUTTON_TYPES.CANCEL} onClick={() => setListTodos(true)}>
+              Cancel
         </Button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        {!addingTodo && (
-          <Button buttonType={BUTTON_TYPES.CANCEL} onClick={() => setListTodos(true)}>
-            Cancel
-        </Button>
-        )}
+          )}
 
-      </FormGroup>
+        </FormGroup>
+      </form>
     </React.Fragment>
   )
 }

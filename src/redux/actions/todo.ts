@@ -28,18 +28,18 @@ export const addTodo = (body: any) => {
     dispatch(addTodoStarted())
 
 
-    // const request = await client.mutate({
-    //   variables: {input: body},
-    //   mutation: ADD_TODO_MUTATION
-    // })
+    const request = await client.mutate({
+      variables: {input: body},
+      mutation: ADD_TODO_MUTATION
+    })
 
-    // try {
-    //   const result = await request
-    //   console.log({result})
-    //   dispatch(addTodoSuccess(result.data.todos.list))
-    // } catch (error) {
-    //   dispatch(addTodoFailure(error.message))
-    // }
+    try {
+      const result = await request
+      client.clearStore()
+      dispatch(addTodoSuccess(result.data.addTodo))
+    } catch (error) {
+      dispatch(addTodoFailure(error.message))
+    }
   }
 }
 
