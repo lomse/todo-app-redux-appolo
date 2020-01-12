@@ -54,30 +54,30 @@ const AddTodoContainer = () => {
 
 
   const handleSubmitButton = () => {
-    let formBody = {}
+    let formBody = {title: todoTitle, dueDate, dueTime}
 
-    if (!todoTitle) {
-      return setFormValidation({ ...formValidation, todoTitle: false })
-    } else {
-      formBody = Object.assign({}, formBody, { title: todoTitle })
-    }
+    setFormValidation({todoTitle: !!todoTitle, dueDate: !!dueDate, dueTime: !!dueTime})
 
-    if (dueDate && !isValid(dueDate)) {
-      return setFormValidation({ ...formValidation, dueDate: false })
-    } else if (dueDate) {
-      formBody = Object.assign({}, formBody, { dueDate })
-    }
+    // if (!todoTitle) {
+    //   return setFormValidation({ ...formValidation, todoTitle: false })
+    // } else {
+    //   formBody = Object.assign({}, formBody, { title: todoTitle })
+    // }
 
-    if (dueTime && !isValid(dueTime)) {
-      return setFormValidation({ ...formValidation, dueTime: false })
-    } else if (dueTime) {
-      formBody = Object.assign({}, formBody, { dueTime })
-    }
+    // if (dueDate && !isValid(dueDate)) {
+    //   return setFormValidation({ ...formValidation, dueDate: false })
+    // } else if (dueDate) {
+    //   formBody = Object.assign({}, formBody, { dueDate })
+    // }
+
+    // if (dueTime && !isValid(dueTime)) {
+    //   return setFormValidation({ ...formValidation, dueTime: false })
+    // } else if (dueTime) {
+    //   formBody = Object.assign({}, formBody, { dueTime })
+    // }
 
     dispatch(addTodo(formBody))
   }
-
-  console.log({ addingTodoEnded })
 
   return (
     <React.Fragment>
