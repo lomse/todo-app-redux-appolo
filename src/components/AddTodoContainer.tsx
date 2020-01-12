@@ -58,24 +58,6 @@ const AddTodoContainer = () => {
 
     setFormValidation({todoTitle: !!todoTitle, dueDate: !!dueDate, dueTime: !!dueTime})
 
-    // if (!todoTitle) {
-    //   return setFormValidation({ ...formValidation, todoTitle: false })
-    // } else {
-    //   formBody = Object.assign({}, formBody, { title: todoTitle })
-    // }
-
-    // if (dueDate && !isValid(dueDate)) {
-    //   return setFormValidation({ ...formValidation, dueDate: false })
-    // } else if (dueDate) {
-    //   formBody = Object.assign({}, formBody, { dueDate })
-    // }
-
-    // if (dueTime && !isValid(dueTime)) {
-    //   return setFormValidation({ ...formValidation, dueTime: false })
-    // } else if (dueTime) {
-    //   formBody = Object.assign({}, formBody, { dueTime })
-    // }
-
     dispatch(addTodo(formBody))
   }
 
