@@ -1,5 +1,5 @@
 import Todo from "./todo.model"
-import { ITodoQuery, ITodosQuery, IAddTodoMutation } from "./todo.interfaces"
+import { ITodoQuery, ITodosQuery, IAddTodoMutation, IDeleteTodoMutation } from "./todo.interfaces"
 
 export default () => {
   const resolvers = {
@@ -18,6 +18,9 @@ export default () => {
           input = Object.assign({}, input, {status: 'Active'})
         }
         return await Todo.create(input)
+      },
+      deleteTodo: async(_: any, {_id}: IDeleteTodoMutation) => {
+        return await Todo.findOneAndDelete(_id)
       }
     }
   }

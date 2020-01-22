@@ -17,14 +17,27 @@ export const GET_TODOS_QUERY = gql`
 `
 
 export const ADD_TODO_MUTATION = gql`
-  mutation addTodo($input:TodoInput!){
-  addTodo(input:$input) {
-    _id
-    title
-    dueDate
-    dueTime
-    repeatInterval
-    status
+  mutation addTodo($input:AddTodoInput!){
+    addTodo(input:$input) {
+      _id
+      title
+      dueDate
+      dueTime
+      repeatInterval
+      status
+    }
   }
-}
+`
+
+export const DELETE_TODO_MUTATION = gql`
+  mutation deleteTodo($input: DeleteTodoInput!) {
+    deleteTodo(input:$input) {
+      _id
+      title
+      dueDate
+      dueTime
+      repeatInterval
+      status
+    }
+  }
 `

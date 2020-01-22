@@ -41,7 +41,7 @@ const OneTodo: React.FC<IOneTodo> = ({ title, dueDate, completed = false }) => (
     <br />
     <StyledTodoDetails>{dueDate ? dueDate : '-'}</StyledTodoDetails>
     {completed ? <CheckedIcon /> : <UnCheckedIcon />}
-    <DeleteIcon />
+    <DeleteIcon onClick={()=>console.log("godo")} />
   </StyledOneTodo>
 )
 

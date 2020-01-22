@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-boost'
-import { FETCH_TODOS_BEGIN, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE, ADD_TODO_FAILURE, ADD_TODO_SUCCESS, ADD_TODO_STARTED } from '../action-types/todos'
-import { ITodo, IFetchTodosTypes, IAddTodoFailureTypes, IAddTodoSuccessTypes, IAddTodoStartedTypes } from '../../types/todo'
-import { GET_TODOS_QUERY, ADD_TODO_MUTATION } from '../../graphql/queries'
+import { FETCH_TODOS_BEGIN, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE, ADD_TODO_FAILURE, ADD_TODO_SUCCESS, ADD_TODO_STARTED, DELETE_TODO_STARTED, DELETE_TODO_SUCCESS, DELETE_TODO_FAILURE } from '../action-types/todos'
+import { ITodo, IFetchTodosTypes, IAddTodoFailureTypes, IAddTodoSuccessTypes, IAddTodoStartedTypes, IAddDeleteFailureTypes } from '../../types/todo'
+import { GET_TODOS_QUERY, ADD_TODO_MUTATION, DELETE_TODO_MUTATION } from '../../graphql/queries'
 
 const client = new ApolloClient({
   uri: 'http://localhost:5000/graphql'
@@ -26,7 +26,6 @@ export const addTodo = (body: any) => {
   return async (dispatch: Function) => {
 
     dispatch(addTodoStarted())
-
 
     const request = await client.mutate({
       variables: {input: body},
@@ -71,8 +70,36 @@ export const addTodoSuccess = (todo: ITodo): IAddTodoSuccessTypes => ({
   type: ADD_TODO_SUCCESS
 })
 
-export const deleteTodo = () => { }
+export const deleteTodo = (_id: string) => {
+  return async (dispatch: Function) => {
+    dispatch(deleteTodoStarted())
+
+    const request = await client.mutate({
+      variables: {_id},
+      mutation: DELETE_TODO_MUTATION
+    })
+
+    try {
+      const result = await request
+      client.clearStore()
+      dispatch(deleteTodoSuccess(result.data.deleteTodo))
+    } catch (error) {
+      dispatch(deleteTodoFailure(error.message))
+    }
+  }
+}
+
+export const deleteTodoStarted = ()=> ({
+  type: DELETE_TODO_STARTED
+})
+
+export const deleteTodoSuccess = (todo: ITodo)=> ({
+  type: DELETE_TODO_SUCCESS
+})
+
+export const deleteTodoFailure = (error: IAddDeleteFailureTypes) => ({
+  error,
+  type: DELETE_TODO_FAILURE
+})
 
 export const updateTodo = () => { }
-
-export const completeTodo = () => { }

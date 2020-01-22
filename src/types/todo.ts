@@ -52,6 +52,11 @@ export interface IAddTodoFailureTypes {
   error: string
 }
 
+export interface IAddDeleteFailureTypes {
+  type: 'DELETE_TODO_FAILURE',
+  error: string
+}
+
 export interface IDropdownOption {
   label: string
   value: string | number

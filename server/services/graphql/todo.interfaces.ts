@@ -30,3 +30,7 @@ export interface ITodosQuery {
 export interface IAddTodoMutation {
   input: ITodoModel
 }
+
+export interface IDeleteTodoMutation {
+  _id: string
+}

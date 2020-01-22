@@ -5,7 +5,7 @@ export default
     todos(status: String): ListOfTodos
   }
 
-  input TodoInput {
+  input AddTodoInput {
     title: String!
     dueDate: String
     dueTime: String
@@ -13,8 +13,13 @@ export default
     status: String
   }
 
+  input DeleteTodoInput {
+    _id: ID!
+  }
+
   type Mutation {
-    addTodo(input: TodoInput!): Todo
+    addTodo(input: AddTodoInput!): Todo
+    deleteTodo(input: DeleteTodoInput!): Todo
   }
 
   schema {

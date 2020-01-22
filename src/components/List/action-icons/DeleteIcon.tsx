@@ -9,6 +9,10 @@ const StyledDeleteIcon = styled.i.attrs(({ className }) => ({ className }))`
   cursor: pointer;
 `
 
-const DeleteIcon: React.FC = () => <StyledDeleteIcon className="fas fa-trash" />
+interface IDeleteIcon {
+  onClick: () => void
+}
+
+const DeleteIcon: React.FC<IDeleteIcon> = () => <StyledDeleteIcon className="fas fa-trash" />
 
 export default DeleteIcon
