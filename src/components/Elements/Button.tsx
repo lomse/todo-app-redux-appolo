@@ -3,17 +3,17 @@ import styled, { css } from 'styled-components'
 import { BUTTON_TYPES } from '../../types/common'
 
 interface IStyledButtonProps {
-  buttonType: BUTTON_TYPES
+  type: any
   disabled: boolean
 }
 
 interface IButtonProps {
-  buttonType: BUTTON_TYPES
+  type: any
   disabled?: boolean
   onClick?: () => void
 }
 
-const StyledButton = styled.button.attrs(props=>({disabled: props.disabled}))<IStyledButtonProps>`
+const StyledButton = styled.button.attrs(props=>({disabled: props.disabled, type: props.type}))<IStyledButtonProps>`
   font-size: 14px;
   padding: 10px 15px;
   border-radius: 5px;
@@ -23,7 +23,7 @@ const StyledButton = styled.button.attrs(props=>({disabled: props.disabled}))<IS
   &:focus {
     outline: none;
   };
-  ${props => props.buttonType === BUTTON_TYPES.SUBMIT && css`
+  ${props => props.type === BUTTON_TYPES.SUBMIT && css`
     background: #83bdfb !important;
   `};
   ${props=>props.disabled && css`

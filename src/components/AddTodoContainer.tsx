@@ -47,18 +47,20 @@ const AddTodoContainer = () => {
   }
 
 
-  const handleSubmitForm = (evt: React.FormEvent)=> {
-      evt.preventDefault();
-      handleSubmitButton()
+  const handleSubmitForm = (evt: React.FormEvent) => {
+    evt.preventDefault()
+    handleSubmitButton()
   }
 
 
   const handleSubmitButton = () => {
-    let formBody = {title: todoTitle, dueDate, dueTime}
+    let formBody = { title: todoTitle, dueDate, dueTime }
 
-    setFormValidation({todoTitle: !!todoTitle, dueDate: !!dueDate, dueTime: !!dueTime})
+    setFormValidation({ todoTitle: !!todoTitle, dueDate: !!dueDate, dueTime: !!dueTime })
 
-    dispatch(addTodo(formBody))
+    if(todoTitle && dueTime && dueTime) {
+      dispatch(addTodo(formBody))
+    }
   }
 
   return (
@@ -66,7 +68,7 @@ const AddTodoContainer = () => {
       {listTodos && <Redirect to={{ pathname: "/" }} />}
       {addingTodoEnded && <Redirect to={{ pathname: "/" }} />}
       <PageTitle>NEW TODO</PageTitle>
-      <form onSubmit={(evt)=>handleSubmitForm(evt)}>
+      <form onSubmit={(evt) => handleSubmitForm(evt)}>
         <FormGroup>
           <Label>Title <sup>*</sup> </Label>
           <TextInputElement type={INPUT_TYPES.TEXT} value={todoTitle} onChange={(evt: React.ChangeEvent<HTMLInputElement>) => handleChangeTodoTitleInput(evt)} />
@@ -101,16 +103,15 @@ const AddTodoContainer = () => {
           <Select options={options} className="reactSelect" value={repeatInterval} onChange={(option) => setRepeatInterval(option)} />
         </FormGroup>
         <FormGroup textAlign="center">
-          <Button disabled={addingTodoStarted} buttonType={BUTTON_TYPES.SUBMIT} onClick={() => handleSubmitButton()}>
+          {!addingTodoStarted && (
+            <Button type={BUTTON_TYPES.CANCEL} onClick={() => setListTodos(true)}>
+              Cancel
+            </Button>
+          )}
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <Button disabled={addingTodoStarted} type={BUTTON_TYPES.SUBMIT} onClick={() => handleSubmitButton()}>
             {!addingTodoStarted ? 'Submit' : 'Please wait...'}
           </Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;
-        {!addingTodoStarted && (
-            <Button buttonType={BUTTON_TYPES.CANCEL} onClick={() => setListTodos(true)}>
-              Cancel
-        </Button>
-          )}
-
         </FormGroup>
       </form>
     </React.Fragment>
