@@ -19,6 +19,14 @@ export interface ITodoModel extends Document {
   status?: ITodoStatus
 }
 
+export interface ITodoUpdateModel extends Document {
+  title?: string
+  dueDate?: Date
+  dueTime?: Date
+  repeatInterval?: ITodoRepeatInterval
+  status?: ITodoStatus
+}
+
 export interface ITodoQuery {
   _id?: string
 }
@@ -29,6 +37,11 @@ export interface ITodosQuery {
 
 export interface IAddTodoMutation {
   input: ITodoModel
+}
+
+export interface IUpdateTodoMutation {
+  _id: string
+  input: ITodoUpdateModel
 }
 
 export interface IDeleteTodoMutation {

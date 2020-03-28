@@ -10,7 +10,7 @@ export enum TODO_REPEAT_INTERVAL {
 }
 
 export interface ITodo {
-  _id: number
+  _id: string
   title: string
   dueDate?: string
   dueTime?: string
@@ -36,7 +36,13 @@ export interface IFetchTodosFailureTypes {
   error: string
 }
 
-export type IFetchTodosTypes = IFetchTodosBeginTypes | IFetchTodosSuccessTypes | IFetchTodosFailureTypes | IAddTodoStartedTypes | IAddTodoSuccessTypes | IAddTodoFailureTypes
+export type IFetchTodosTypes = IFetchTodosBeginTypes
+  | IFetchTodosSuccessTypes
+  | IFetchTodosFailureTypes
+  | IAddTodoStartedTypes
+  | IAddTodoSuccessTypes
+  | IAddTodoFailureTypes
+  | IUpdateTodoSuccessTypes
 
 export interface IAddTodoStartedTypes {
   type: 'ADD_TODO_STARTED',
@@ -50,6 +56,11 @@ export interface IAddTodoSuccessTypes {
 export interface IAddTodoFailureTypes {
   type: 'ADD_TODO_FAILURE',
   error: string
+}
+
+export interface IUpdateTodoSuccessTypes {
+  type: 'UPDATE_TODO_SUCCESS',
+  item: ITodo
 }
 
 export interface IAddDeleteFailureTypes {

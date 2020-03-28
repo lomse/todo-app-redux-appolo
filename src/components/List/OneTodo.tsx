@@ -5,6 +5,7 @@ import UnCheckedIcon from './action-icons/UnCheckedIcon'
 import DeleteIcon from './action-icons/DeleteIcon'
 
 interface IOneTodo {
+  _id: string
   title: string
   dueDate?: string
   completed?: boolean
@@ -35,12 +36,12 @@ const StyledTodoTitle = styled.span<IStyledTodoTitle>`
   text-decoration: ${({ completed }) => (completed ? 'line-through' : '')};
 `
 
-const OneTodo: React.FC<IOneTodo> = ({ title, dueDate, completed = false }) => (
+const OneTodo: React.FC<IOneTodo> = ({ _id, title, dueDate, completed = false }) => (
   <StyledOneTodo>
     <StyledTodoTitle completed={completed}>{title}</StyledTodoTitle>
     <br />
     <StyledTodoDetails>{dueDate ? dueDate : '-'}</StyledTodoDetails>
-    {completed ? <CheckedIcon /> : <UnCheckedIcon />}
+    {completed ? <CheckedIcon _id={_id} /> : <UnCheckedIcon _id={_id} />}
     <DeleteIcon onClick={()=>console.log("godo")} />
   </StyledOneTodo>
 )

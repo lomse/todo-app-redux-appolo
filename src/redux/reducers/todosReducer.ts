@@ -1,5 +1,5 @@
 import { IFetchTodosTypes, ITodo } from '../../types/todo'
-import { FETCH_TODOS_BEGIN, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE, ADD_TODO_STARTED, ADD_TODO_SUCCESS, ADD_TODO_FAILURE } from '../action-types/todos'
+import { FETCH_TODOS_BEGIN, FETCH_TODOS_SUCCESS, FETCH_TODOS_FAILURE, ADD_TODO_STARTED, ADD_TODO_SUCCESS, ADD_TODO_FAILURE, UPDATE_TODO_SUCCESS } from '../action-types/todos'
 
 export interface ITodoState {
   items: ITodo[]
@@ -53,6 +53,14 @@ const todosReducer = (state = initialState, action: IFetchTodosTypes) => {
         error: null
       }
     case ADD_TODO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        addingStarted: false,
+        addingEnded: true,
+        error: null
+      }
+    case UPDATE_TODO_SUCCESS:
       return {
         ...state,
         loading: false,
