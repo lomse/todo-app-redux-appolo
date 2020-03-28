@@ -21,14 +21,10 @@ export default
     status: String
   }
 
-  input DeleteTodoInput {
-    _id: ID!
-  }
-
   type Mutation {
     addTodo(input: AddTodoInput!): Todo
     updateTodo(_id: String!, input: UpdateTodoInput): Todo
-    deleteTodo(input: DeleteTodoInput!): Todo
+    deleteTodo(_id: ID!): Todo
   }
 
   schema {

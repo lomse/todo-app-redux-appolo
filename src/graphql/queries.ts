@@ -43,8 +43,8 @@ export const UPDATE_TODO_MUTATION = gql`
 `
 
 export const DELETE_TODO_MUTATION = gql`
-  mutation deleteTodo($input: DeleteTodoInput!) {
-    deleteTodo(input:$input) {
+  mutation deleteTodo($_id: ID!) {
+    deleteTodo(_id:$_id) {
       _id
       title
       dueDate

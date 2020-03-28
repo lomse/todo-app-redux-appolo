@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import { deleteTodo } from '../../../redux/actions/todo'
 
 const StyledDeleteIcon = styled.i.attrs(({ className }) => ({ className }))`
   position: absolute;
@@ -9,10 +11,19 @@ const StyledDeleteIcon = styled.i.attrs(({ className }) => ({ className }))`
   cursor: pointer;
 `
 
-interface IDeleteIcon {
-  onClick: () => void
+interface IDeleteIconProps {
+  _id: string
 }
 
-const DeleteIcon: React.FC<IDeleteIcon> = () => <StyledDeleteIcon className="fas fa-trash" />
+const DeleteIcon: React.FC<IDeleteIconProps> = ({ _id }) => {
+
+  const dispatch = useDispatch()
+
+  const handleDeleteTodo = (_id: string) => {
+    dispatch(deleteTodo(_id))
+  }
+
+  return <StyledDeleteIcon onClick={() => handleDeleteTodo(_id)} className="fas fa-trash" />
+}
 
 export default DeleteIcon

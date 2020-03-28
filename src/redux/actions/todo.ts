@@ -86,8 +86,10 @@ export const deleteTodo = (_id: string) => {
 
     try {
       const result = await request
+      console.log({result})
       await client.resetStore()
-      dispatch(deleteTodoSuccess(result.data.deleteTodo))
+      
+      dispatch(fetchTodos())
     } catch (error) {
       dispatch(deleteTodoFailure(error.message))
     }
