@@ -63,6 +63,12 @@ const AddTodoContainer = () => {
     }
   }
 
+  const handleCancelForm = (evt: React.MouseEvent)=> {
+    evt.preventDefault()
+
+    setListTodos(true)
+  }
+
   return (
     <React.Fragment>
       {listTodos && <Redirect to={{ pathname: "/" }} />}
@@ -103,15 +109,13 @@ const AddTodoContainer = () => {
           <Select options={options} className="reactSelect" value={repeatInterval} onChange={(option) => setRepeatInterval(option)} />
         </FormGroup>
         <FormGroup textAlign="center">
-          {!addingTodoStarted && (
-            <Button type={BUTTON_TYPES.CANCEL} onClick={() => setListTodos(true)}>
-              Cancel
-            </Button>
-          )}
-          &nbsp;&nbsp;&nbsp;&nbsp;
           <Button disabled={addingTodoStarted} type={BUTTON_TYPES.SUBMIT} onClick={() => handleSubmitButton()}>
             {!addingTodoStarted ? 'Submit' : 'Please wait...'}
           </Button>
+        </FormGroup>
+
+        <FormGroup textAlign="center">
+            <a href="!#" onClick={handleCancelForm}>Cancel</a>
         </FormGroup>
       </form>
     </React.Fragment>

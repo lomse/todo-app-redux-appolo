@@ -28,27 +28,28 @@ interface ITodosListWrapper {
   todos: ITodo[]
   loading: boolean
   error: string | null
+  filter: string | undefined
 }
 
-const TodosListWrapper: React.FC<ITodosListWrapper> = ({ todos, loading, error }) => {
+const TodosListWrapper: React.FC<ITodosListWrapper> = ({ todos, loading, error, filter }) => {
   return (
     <React.Fragment>
       <PageTitle>ALL TODOS</PageTitle>
 
-      {todos.length > 0 && (
-        <FilterLinksMenu>
-          <FilterLinksMenuItem>Show:</FilterLinksMenuItem>
-          <FilterLinksMenuItem>
-            <Link to="/">All</Link>
-          </FilterLinksMenuItem>
-          <FilterLinksMenuItem>
-            <Link to="/filter/active">Active</Link>
-          </FilterLinksMenuItem>
-          <FilterLinksMenuItem>
-            <Link to="/filter/completed">Completed</Link>
-          </FilterLinksMenuItem>
-        </FilterLinksMenu>
-      )}
+      {/* {todos.length > 0 && ( */}
+      <FilterLinksMenu>
+        <FilterLinksMenuItem>Show:</FilterLinksMenuItem>
+        <FilterLinksMenuItem>
+          <Link to="/" style={{ color: (filter === undefined ? 'red' : '') }}>All</Link>
+        </FilterLinksMenuItem>
+        <FilterLinksMenuItem>
+          <Link to="/filter/active" style={{ color: (filter === 'active' ? 'red' : '') }}>Active</Link>
+        </FilterLinksMenuItem>
+        <FilterLinksMenuItem>
+          <Link to="/filter/completed" style={{ color: (filter === 'completed' ? 'red' : '') }}>Completed</Link>
+        </FilterLinksMenuItem>
+      </FilterLinksMenu>
+      {/* )} */}
 
       {loading && (
         <PreloaderDiv>
